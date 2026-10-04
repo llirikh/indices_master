@@ -1,4 +1,5 @@
 fastapi==0.111.0
+pydantic==2.7.4
 pydantic-settings==2.3.3
 tortoise==0.1.1
 polyfactory==2.16.0
