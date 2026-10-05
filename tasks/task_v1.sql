@@ -1,23 +1,23 @@
 -- ### Задание-1: Ускорение поиска
 
--- ```sql
--- SELECT 
---     "users_user"."id", 
---     "users_user"."first_name", 
---     "users_user"."second_name", 
---     "users_user"."last_name", 
---     "users_user"."email", 
---     "users_user"."address", 
---     "users_user"."phone_number", 
---     "users_user"."company_id", 
---     "users_user"."job_id" 
--- FROM 
---     "users_user" 
--- WHERE 
---     (UPPER("users_user"."id"::text) = UPPER('John') 
---     OR UPPER("users_user"."first_name"::text) LIKE UPPER('John%') 
---     OR UPPER("users_user"."last_name"::text) LIKE UPPER('John%'));
--- ```
+CREATE INDEX users_user_first_name ON users_user(UPPER(first_name::text) text_pattern_ops);
+CREATE INDEX users_user_last_name ON users_user(UPPER(last_name::text) text_pattern_ops);
+
+SELECT 
+	"users_user"."id", 
+    "users_user"."first_name", 
+    "users_user"."second_name", 
+    "users_user"."last_name", 
+    "users_user"."email", 
+    "users_user"."address", 
+    "users_user"."phone_number", 
+    "users_user"."company_id", 
+    "users_user"."job_id" 
+FROM 
+    "users_user" 
+WHERE 
+    UPPER("users_user"."first_name"::text) LIKE UPPER('John%') 
+    OR UPPER("users_user"."last_name"::text) LIKE UPPER('John%');
 
 -- #### Задача:
 
